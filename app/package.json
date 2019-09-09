@@ -1,0 +1,29 @@
+{
+  "name": "getting-started-javascript-sdk-react",
+  "version": "1.0.0",
+  "dependencies": {
+    "@smartcar/auth": "^2.0.0",
+    "axios": "^0.18.0",
+    "bluebird": "^3.5.5",
+    "bootstrap": "^4.3.1",
+    "match-sorter": "^4.0.1",
+    "moment": "^2.24.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-scripts": "2.1.1",
+    "react-table": "^6.10.2",
+    "react-table-view": "^1.1.1",
+    "reactstrap": "^8.0.1",
+    "smartcar": "^7.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

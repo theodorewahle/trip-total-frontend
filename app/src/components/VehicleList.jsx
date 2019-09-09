@@ -1,0 +1,34 @@
+import React from 'react'
+import { Container, Row, Button } from 'reactstrap'
+import Vehicle from './Vehicle'
+
+export default class VehicleList extends React.Component {
+    render() {
+        const { vehicles } = this.props
+
+        const vehiclesBeingRented = vehicles.filter(vehicle => vehicle.isBeingRented)
+        const vehiclesNotBeingRented = vehicles.filter(vehicle => !vehicle.isBeingRented)
+
+        return (
+            <Container>
+                <h1>Vehicles</h1><Button onClick={this.props.onClick}>Add New Car(s)</Button>
+                
+                {vehiclesBeingRented.length > 0 && (
+                <div>
+                <h3>Rentals In Progress</h3>
+                {vehiclesBeingRented.map(vehicle => (
+                    <Vehicle vehicle={vehicle} getAllVehicles={this.props.getAllVehicles} getAllTrips={this.props.getAllTrips}/>
+                ))}
+                </div>)
+            }
+
+                
+
+                <h3>Not Currently Being Rented</h3>
+                {vehiclesNotBeingRented.map(vehicle => (
+                    <Vehicle vehicle={vehicle} getAllVehicles={this.props.getAllVehicles} getAllTrips={this.props.getAllTrips}/>
+                ))}
+            </Container>
+        )
+    }
+}
