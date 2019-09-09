@@ -1,0 +1,82 @@
+{
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "paths": ["src/lib", "src"],
+                "moduleDirectory": ["node_modules", "src/lib", "src"]
+            }
+        },
+        "react": {
+            "version": "16.6.3"
+        }
+    },
+    "extends": ["airbnb", "prettier"],
+    "parser": "babel-eslint",
+    "plugins": ["prettier"],
+    "rules": {
+        "class-methods-use-this": 0,
+        "no-shadow": [
+            "error",
+            {
+                "allow": ["styles"]
+            }
+        ],
+        "react/prefer-stateless-function": 0,
+        "react/jsx-indent": 0,
+        "react/no-did-update-set-state": 0,
+        "react/jsx-indent-props": 0,
+        "react/jsx-filename-extension": 0,
+        "react/jsx-one-expression-per-line": 0,
+        "react/prop-types": [
+            "error",
+            {
+                "ignore": ["children"]
+            }
+        ],
+        "react/sort-comp": [
+            "error",
+            {
+                "order": ["static-methods", "lifecycle", "everything-else", "/^render.+$/", "render"]
+            }
+        ],
+        "prettier/prettier": [
+            "error",
+            {
+                "tabWidth": 4,
+                "singleQuote": true,
+                "printWidth": 120
+            }
+        ],
+        "import/extensions": [
+            "error",
+            {
+                "js": "never"
+            }
+        ],
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": true
+            }
+        ],
+        "import/prefer-default-export": 0,
+
+        "jsx-a11y/anchor-is-valid": [
+            "error",
+            {
+                "components": ["Link"],
+                "specialLink": ["to"]
+            }
+        ],
+        "no-restricted-imports": [
+            "error",
+            {
+                "paths": ["lodash"],
+                "patterns": ["works/*", "!works/app"]
+            }
+        ]
+    },
+    "env": {
+        "browser": true
+    }
+}
