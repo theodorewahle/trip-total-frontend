@@ -1,8 +1,15 @@
 import React from "react";
-import { Container, Row, Col, Button } from "reactstrap";
+import { Container, Row, Col, Button, ButtonGroup } from "reactstrap";
 import Vehicle from "./Vehicle";
+import CarMap from "./CarMap";
 
 export default class VehicleList extends React.Component {
+  state = { view: "list" };
+
+  onRadioBtnClick = view => {
+    this.setState({ view });
+  };
+
   render() {
     const { vehicles } = this.props;
 
@@ -13,37 +20,82 @@ export default class VehicleList extends React.Component {
       vehicle => !vehicle.isBeingRented
     );
 
+    console.log("this.props.vehicles", this.props.vehicles);
     return (
       <Container>
         <Col>
-          <Row>
+          <Row
+            style={{
+              marginBottom: 16,
+              marginTop: 16,
+              display: "flex",
+              justifyContent: "space-between"
+            }}
+          >
             <Col>
-              <h1 style={{ marginBottom: 16 }}>Vehicles</h1>
+              <h1>Vehicles</h1>
             </Col>
-            <Col>
-              <Button onClick={this.props.onClick}>Add New Car(s)</Button>
+            <Col
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            >
+              <ButtonGroup style={{ marginRight: 16 }}>
+                <Button
+                  color="primary"
+                  onClick={() => this.onRadioBtnClick("list")}
+                  active={this.state.view === "list"}
+                >
+                  List
+                </Button>
+                <Button
+                  color="primary"
+                  onClick={() => this.onRadioBtnClick("map")}
+                  active={this.state.view === "map"}
+                >
+                  Map
+                </Button>
+              </ButtonGroup>
+              <Button color="success" onClick={this.props.onClick}>
+                Add
+              </Button>
             </Col>
           </Row>
-          {vehiclesBeingRented.length > 0 && (
+
+          {this.state.view === "list" && (
             <div>
-              <h3>Rentals In Progress</h3>
-              {vehiclesBeingRented.map(vehicle => (
-                <Vehicle
-                  vehicle={vehicle}
-                  getAllVehicles={this.props.getAllVehicles}
-                  getAllTrips={this.props.getAllTrips}
-                />
-              ))}
+              {vehiclesBeingRented.length > 0 && (
+                <div>
+                  <h3 style={{ marginBottom: 16 }}>Rentals In Progress</h3>
+
+                  <Container style={{ maxHeight: 300, overflowY: "scroll" }}>
+                    {vehiclesBeingRented.map(vehicle => (
+                      <Vehicle
+                        vehicle={vehicle}
+                        getAllVehicles={this.props.getAllVehicles}
+                        getAllTrips={this.props.getAllTrips}
+                      />
+                    ))}
+                  </Container>
+                </div>
+              )}
+
+              <h3 style={{ marginBottom: 16 }}>Not Currently Being Rented</h3>
+              <Container style={{ maxHeight: 400, overflowY: "scroll" }}>
+                {vehiclesNotBeingRented.map(vehicle => (
+                  <Vehicle
+                    vehicle={vehicle}
+                    getAllVehicles={this.props.getAllVehicles}
+                    getAllTrips={this.props.getAllTrips}
+                  />
+                ))}
+              </Container>
             </div>
           )}
-          <h3>Not Currently Being Rented</h3>
-          {vehiclesNotBeingRented.map(vehicle => (
-            <Vehicle
-              vehicle={vehicle}
-              getAllVehicles={this.props.getAllVehicles}
-              getAllTrips={this.props.getAllTrips}
-            />
-          ))}
+
+          {this.state.view === "map" && <CarMap vehicles={vehicles} />}
         </Col>
       </Container>
     );

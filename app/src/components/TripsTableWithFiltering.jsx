@@ -24,7 +24,7 @@ export default class TripsTable extends React.Component {
 
     return (
       <Container>
-        <h1 style={{ marginBottom: 16 }}>All Trips</h1>
+        <h1 style={{ marginBottom: 16, marginTop: 16 }}>All Trips</h1>
         <ReactTable
           data={tripsToDisplay}
           filterable
